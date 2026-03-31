@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 type Post = {
   id: number;
@@ -40,15 +46,17 @@ export default function Index() {
     );
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+    <FlatList
+      data={posts}
+      keyExtractor={(item) => item.id.toString()}
+      contentContainerStyle={styles.lista}
+      renderItem={({ item }) => (
+        <View style={styles.card}>
+          <Text style={styles.titolo}>{item.title}</Text>
+          <Text style={styles.corpo}>{item.body}</Text>
+        </View>
+      )}
+    />
   );
 }
 
